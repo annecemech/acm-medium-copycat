@@ -1,5 +1,6 @@
 class Article < ApplicationRecord
   belongs_to :user
+  has_many :comments
   validates :title, presence: true
   validates :visibility, inclusion: { in: %w(public private),
     message: "%{value} is not a valid argument" }
