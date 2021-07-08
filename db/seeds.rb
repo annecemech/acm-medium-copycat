@@ -8,6 +8,7 @@ require "open-uri"
 #   Character.create(name: 'Luke', movie: movies.first)
 puts "Cleaning Database"
 
+Comment.destroy_all
 Article.destroy_all
 User.destroy_all
 
@@ -28,18 +29,27 @@ user3 = User.create!(
   password: 'azerty'
 )
 
-puts "Creating 10 articles"
+puts "Creating 10 articles with 5 comments each"
 
 10.times do
   article = Article.new(
     title: Faker::Lorem.paragraph(sentence_count: 1),
     rich_body: Faker::Lorem.paragraph(sentence_count: 100),
     user: [user1, user2, user3].sample,
+    votes: rand(1..100),
     visibility: ["public", "public", "private"].sample
     )
   file = URI.open('https://source.unsplash.com/random/800x600')
   article.photo.attach(io: file, filename: 'article_image.jpg', content_type: 'image/jpg')
   article.save!
+
+  5.times do
+    Comment.create!(
+      article: article,
+      user: [user1, user2, user3].sample,
+      content: Faker::Lorem.paragraph(sentence_count: 20)
+    )
+  end
 end
 
 puts "Seed is ok!"
