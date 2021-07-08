@@ -32,8 +32,8 @@ puts "Creating 10 articles"
 
 10.times do
   article = Article.new(
-    title: Faker::Movies::BackToTheFuture.quote,
-    rich_body: Faker::Lorem.paragraph(sentence_count: 10),
+    title: Faker::Lorem.paragraph(sentence_count: 1),
+    rich_body: Faker::Lorem.paragraph(sentence_count: 100),
     user: [user1, user2, user3].sample,
     visibility: ["public", "public", "private"].sample
     )
