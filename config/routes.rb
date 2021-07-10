@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
   root to: 'articles#index'
-  resources :articles, only: [:show, :new, :create ] do
-    resources :comments, only: :create
+  resources :articles, only: [:show, :new, :create, :index ] do
+    resources :comments, only: [ :new, :create ]
   end
 
   get '/articles/:id/upvote', to: 'articles#upvote', as: 'upvote'

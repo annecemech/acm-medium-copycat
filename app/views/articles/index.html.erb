@@ -1,5 +1,13 @@
 <div class="container">
   <div class="article-list-container">
+    <%= form_tag articles_path, method: :get do %>
+      <%= text_field_tag :query,
+        params[:query],
+        class: "form-control",
+        placeholder: "Titre de l'article"
+      %>
+      <%= submit_tag "Chercher", class: "btn btn-nav" %>
+    <% end %>
     <h1>Voici les derniers articles</h1>
       <div class="articles">
         <% @articles.each do |article| %>
