@@ -1,0 +1,20 @@
+h1, h2 {
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+}
+
+h3 {
+  color: $green;
+}
+
+.text-emphasized {
+  color: $green;
+}
+
+.article-container, .article-list-container {
+  margin: 3rem 0;
+}
+
+.article-container img {
+    width: 100%;
+}

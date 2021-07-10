@@ -1,2 +1,13 @@
-<h1>Articles#new</h1>
-<p>Find me in app/views/articles/new.html.erb</p>
+<div class="container">
+  <div class="article-container">
+    <h1>Nouvel article</h1>
+
+    <%= simple_form_for @article do |f| %>
+      <%= f.input :title %>
+      <%= f.rich_text_area :rich_body %>
+      <%= f.input :visibility, collection: ["privé", "public"] %>
+      <%= f.submit "Add", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
+

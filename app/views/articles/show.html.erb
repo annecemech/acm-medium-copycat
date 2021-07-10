@@ -1,2 +1,22 @@
-<h1>Articles#show</h1>
-<p>Find me in app/views/articles/show.html.erb</p>
+<div class="container">
+  <div class="article-container">
+    <h1><%= @article.title %> </h1>
+    <p class="article-author">Posté par <span class="text-emphasized"><%= @article.user.email %></span> le <span class="text-emphasized"><%= @article.created_at.strftime("%Y-%m-%d") %></span></p>
+    <%= link_to "Voter pour cet article", upvote_path(@article), class: "btn btn-main" %>
+    <p><%= @article.votes %> votes</p>
+    <%= cl_image_tag @article.photo.key %>
+    <p class="article-content"><%= @article.rich_body %></p>
+  </div>
+  <h3>Les commentaires</h3>
+  <div class="article-comments">
+    <% @article.comments.each do |comment|%>
+    <div class="card-comment">
+      <div class="comment-infos">
+        <p><span class="text-emphasized">Posté par:</span> <%= comment.user.email %></p>
+        <p class="comment-date"><span class="text-emphasized">Le</span> <%= comment.created_at.strftime("%Y-%m-%d") %></p>
+      </div>
+      <p class="comment-content"><%= comment.content %></p>
+    </div>
+    <% end %>
+  </div>
+</div>
