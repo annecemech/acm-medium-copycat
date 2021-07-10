@@ -2,11 +2,16 @@ class ArticlesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
 
   def index
-    @articles = Article.where(visibility: "public")
+    if params[:query].present?
+      @articles = Article.where("title ILIKE ?", "%#{params[:query]}%").where(visibility: "public")
+    else
+      @articles = Article.where(visibility: "public")
+    end
   end
 
   def show
     @article = Article.find(params[:id])
+    @comment = Comment.new
   end
 
   def new

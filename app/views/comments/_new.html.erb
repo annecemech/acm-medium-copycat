@@ -1,0 +1,4 @@
+<%= simple_form_for [ article, comment ] do |f| %>
+  <%= f.input :content, label: 'Postez votre commentaire' %>
+  <%= f.submit "Envoyer", class: "btn btn-main" %>
+<% end %>
