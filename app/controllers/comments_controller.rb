@@ -1,12 +1,11 @@
 class CommentsController < ApplicationController
+  before_action :set_article, only: [:new, :create]
 
   def new
-    @article = Article.find(params[:article_id])
     @comment = Comment.new(article_id: @article)
   end
 
   def create
-    @article = Article.find(params[:article_id])
     @comment = Comment.new(comments_params)
     @comment.article = @article
     @comment.user = current_user
@@ -18,6 +17,10 @@ class CommentsController < ApplicationController
   end
 
   private
+
+  def set_article
+    @article = Article.find(params[:article_id])
+  end
 
   def comments_params
     params.require(:comment).permit(:content, :article_id)
