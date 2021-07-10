@@ -3,10 +3,11 @@
     <h1>Nouvel article</h1>
 
     <%= simple_form_for @article do |f| %>
-      <%= f.input :title %>
+      <%= f.input :title, label: 'Titre' %>
       <%= f.rich_text_area :rich_body %>
-      <%= f.input :visibility, collection: ["privé", "public"] %>
-      <%= f.submit "Add", class: "btn btn-primary" %>
+      <%= f.input :visibility, label: 'Visibilité', collection: ["privé", "public"] %>
+      <%= f.input :photo, as: :file, label: 'Photo à la une' %>
+      <%= f.submit "Poster l'article", class: "btn btn-main" %>
     <% end %>
   </div>
 </div>

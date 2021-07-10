@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="article-list-container">
+    <%= form_tag articles_path, method: :get do %>
+      <%= text_field_tag :query,
+        params[:query],
+        class: "form-control",
+        placeholder: "Titre de l'article"
+      %>
+      <%= submit_tag "Chercher", class: "btn btn-nav" %>
+    <% end %>
+    <h1>Voici les articles que vous avez publiés</h1>
+      <div class="articles">
+        <% @articles.each do |article| %>
+          <div class="card-article">
+            <div class="card-article-infos">
+              <p class="card-article-author">Visibilité :<%= article.visibility %></p>
+              <h2><%= article.title %></h2>
+              <p><%= article.short_description %></p>
+              <%= link_to "Changer la visibilité", visibility_path(article), class: "btn btn-main" %>
+            </div>
+            <%= cl_image_tag article.photo.key %>
+          </div>
+        <% end %>
+      </div>
+  </div>
+</div>
