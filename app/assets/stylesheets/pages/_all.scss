@@ -10,3 +10,11 @@ h3 {
 .text-emphasized {
   color: $green;
 }
+
+.article-container, .article-list-container {
+  margin: 3rem 0;
+}
+
+.article-container img {
+    width: 100%;
+}

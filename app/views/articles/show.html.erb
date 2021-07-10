@@ -2,6 +2,8 @@
   <div class="article-container">
     <h1><%= @article.title %> </h1>
     <p class="article-author">Posté par <span class="text-emphasized"><%= @article.user.email %></span> le <span class="text-emphasized"><%= @article.created_at.strftime("%Y-%m-%d") %></span></p>
+    <%= link_to "Voter pour cet article", upvote_path(@article), class: "btn btn-main" %>
+    <p><%= @article.votes %> votes</p>
     <%= cl_image_tag @article.photo.key %>
     <p class="article-content"><%= @article.rich_body %></p>
   </div>

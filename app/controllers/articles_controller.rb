@@ -2,7 +2,7 @@ class ArticlesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
 
   def index
-    @articles = Article.all
+    @articles = Article.where(visibility: "public")
   end
 
   def show
@@ -10,17 +10,30 @@ class ArticlesController < ApplicationController
   end
 
   def new
+    @article = Article.new
   end
 
   def create
+    @article = Article.new(article_params)
+    @article.user = current_user
+    @article.visibility = "public"
+    if @article.save
+      redirect_to article_path(@article)
+    else
+      render 'new'
+    end
   end
 
-  def edit
+  def upvote
+    @article = Article.find(params[:id])
+    @article.votes += 1
+    @article.save!
+    redirect_to article_path(@article)
   end
 
-  def update
-  end
+  private
 
-  def destroy
+  def article_params
+    params.require(:article).permit(:title, :rich_body, :photo)
   end
 end
