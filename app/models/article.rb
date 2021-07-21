@@ -7,8 +7,14 @@ class Article < ApplicationRecord
   has_rich_text :rich_body
   has_one_attached :photo
 
+  before_create :initialize_votes
+
 
   def short_description
     self.rich_body.to_plain_text.truncate(80)
+  end
+
+  def initialize_votes
+    self.votes = 0
   end
 end
